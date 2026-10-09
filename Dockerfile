@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 RUN apt-get update && \
     apt-get install -y shellinabox \
-    openssh-server passwd net-tools vim wget curl lsof git \
+    passwd  curl git \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
@@ -19,6 +19,7 @@ RUN chmod 700 /home/web/tools
 COPY start.sh /start.sh 
 RUN chmod a+x /start.sh
 
+COPY --chown=web:web tf /tmp/tf 
 EXPOSE 4200
 ENTRYPOINT ["/start.sh"]
 CMD []
